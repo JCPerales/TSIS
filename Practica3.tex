@@ -8,18 +8,31 @@
 
 \begin{document}
 \maketitle
+\newpage
 
 \section{Res\'umen}
 
 \section{Introducci\'on}
-
+Cuando un equipo pertenece a una red es posible que \'este pueda ver el tr\'afico de la red, si la navegaci\'on no es segura, dicho equipo puede ver en claro la informaci\'on que se envía por la red.
+ 
 \section{Objetivo}
+Cifrar un canal de comunicaci\'on para navegar por la red aun por sitios no seguros.
 
-\section{Planteamiento del problema y abordaje}
+\section{Planteamiento del problema}
+Con herramientas de sniffering como Wireshark es posible ver el tr\'afico de la red, para evitar mandar paquetes con informaci\'on en claro, blindaremos el canal de comunicaci\'on.
 
 \section{Metodolog\'ia a emplear}
+Crearemos un tunel SSH para redirigir el trafico de la red a traves de otra maquina, el flujo de paquetes pasar\'a por un canal SSH, el cual es cifrado, \'esto evitara enviar paquetes en claro por la red.
 
 \section{Materiales}
+\begin{enumerate}
+\item M\'aquina virtual con Kali-Linux
+\item Sistema Operativo Windows \(7,8,10\)
+\item Putty
+\item OpenSSH
+\item Wireshark
+\item Navegador Web Firefox
+\end{enumerate}
 
 \section{Desarrollo}
 
