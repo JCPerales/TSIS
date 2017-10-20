@@ -4,20 +4,19 @@
 %Paquete para usar la opcion H (posicion) en las imagenes
 \usepackage{float}
 %Ruta de las capturadas utilizadas
-\graphicspath{ {capturas/tunelssh//} }
+\graphicspath{ {capturas/tunelssh//} {capturas/arpspoofing//}}
 
 \title{Practica 3: Ataque ARP Spoofing y tunneling con SSH}
 \author{Juan Carlos Perales de Jes\'us, Yafte Aaron Flores, Ra\'ul C\'astulo Ortega}
 \date{19 Octubre 2017}
-\
-\makeindex
 
 \begin{document}
 \maketitle
 \newpage
 
 \section{Res\'umen}
-
+Clonaremos la direcci\'on MAC de un router para interceptar el tr\'afico en una red, a \'esto se le conoce como ARP Spoofing, por otro lado veremos la manera de cifrar un canal de comunicaci\'on para proteger de alguna manera la navegaci\'on por sitios no seguros.
+ 
 \section{Introducci\'on}
 Cuando un equipo pertenece a una red es posible que \'este pueda ver el tr\'afico de la red, si la navegaci\'on no es segura, dicho equipo puede ver en claro la informaci\'on que se env\'ia por la red.
  
@@ -37,7 +36,7 @@ Con herramientas de sniffering como Wireshark es posible ver el tr\'afico de la 
 
 \section{Metodolog\'ia a emplear}
 \subsection{ARP Spoofing}
-
+Utilizaremos Ettercap para clonar la MAC de un router y recibir todos los paquetes que se envien a trav\'es de la red.
 \subsection{Tunel SSH}
 Crearemos un tunel SSH para redirigir el tr\'afico de la red a trav\'es de otra m\'aquina, el flujo de paquetes pasar\'a por un canal SSH, el cual es cifrado, \'esto evitar\'a enviar paquetes en claro por la red.
 
@@ -61,11 +60,12 @@ Crearemos un tunel SSH para redirigir el tr\'afico de la red a trav\'es de otra 
 \item Navegador Web Firefox
 \end{enumerate}
 
+\newpage
 \section{Desarrollo}
 \subsection{ARP Spoofing}
 Los siguientes pasos se realizar\'on estando en Kali Linux.
 \subsubsection{Realizar ataque ARP Poisoning utilizando la herramienta Ettercap en Kali Linux.}
-Ejecutar Ettercap, em¿n el men\'u de aplicaciones, submen\'u Sniff->Unified Sniffing.
+Ejecutar Ettercap, en el men\'u de aplicaciones, submen\'u Sniff->Unified Sniffing.
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{01-UNIFIEDSNIFFING}
@@ -79,7 +79,7 @@ Posteriormente buscar los Host conectados en el men\'u, Host->Host List.
 
 Para realizar la suplantaci\'on 
 
-En Target 1 Seleccionamos la IP del dispositivo a monitorear, en este caso windows 7 o superior.
+En Target 1 Seleccionamos la IP del dispositivo a monitorear, en \'este caso windows 7 o superior.
 
 \begin{figure}[H]
 \centering
@@ -106,7 +106,7 @@ Una vez hecho esto ya esta suplantada la direcci\'ón MAC y se habilita Wireshar
 
 
 
-\subsection{Tunel SSH}
+\subsection{T\'unel SSH}
 Los siguientes pasos se llevarón a cabo desde el sistema operativo Windows 10, con una m\'aquina virtual con Kali linux.
 
 \subsubsection{Obtener IP de m\'aquina host (windows) y m\'aquina virtual (kali linux)}
@@ -202,7 +202,7 @@ Ya que pudimos acceder a la m\'aquina virtual por medio de SSH, ahora cargamos l
 
 \subsubsection{Configuraci\'on de Firefox}
 
-Despu\'ues de preparar el tunel SSH, tenemos que configurar nuestro navegador para redirigir el tr\'afico a trav\'es del tunel. Para lo anterior nos vamos a las opciones de Firefox
+Despu\'ues de preparar el t\'unel SSH, tenemos que configurar nuestro navegador para redirigir el tr\'afico a trav\'es del tunel. Para lo anterior nos vamos a las opciones de Firefox
 
 %Imagen 11
 \begin{figure}[H]
@@ -229,8 +229,7 @@ Por \'ultimo marcamos la casilla que dice \emph{Configuraci\'on manual del proxy
 Damos clic en \emph{Aceptar} y listo, tenemos nuestro tunel SSH que pasa todo el tr\'afico enviado por Firefox en la m\'aquina host a la m\'aquina virtual kali linux de manera encriptada.
 
 \section{Resultados}
-\subsection{ARP Spoofing}
-\subsection{Resultados del tunel SSH}
+
 Para corroborar que funciona el tunel SSH, accedemos a una p\'agina sin seguridad, en este caso utilizamos \emph{www.gusanito.com}.
 
 %Imagen 14
@@ -265,15 +264,13 @@ Al final de lado de la m\'aquina remota, se siguen enviando los paquetes en clar
 \section{Discusi\'on}
 
 \subsection{ARP Spoofing}
-
+La \'unica manera de evitar un ARP Spoofing es monitorear constantemente la red, si vemos que diferentes IP's tienen la misma MAC quiere decir que alguien monitorea el tr\'afico en nuestra red
 \subsection{Tunel SSH}
 
 Un tunel SSH sirve muy bien cuando en nuestra red, llamemosla 'A', tenemos incertidumbre sobre la seguridad de posible sniffering, de modo que nos conectamos a una red 'B' m\'as segura, para enviar todo el tr\'afico a trav\'es de la red B y no de la nuestra, la A, ya que si hay alguien escuchando en la red A, no podr\'a descifrar el contenido que viaja pues va encriptado en el tunel SSH.
 
 \section{Conclusiones}
-En la practica nos damos cuenta la falta de seguridad, para que no puedan interceptar nuestro trafico facilmente, por medio de sniffer como wireshark, 
-si un atacante lanza el ataque hombre de enmedio estará interceptando la totalidad de nuestro tráfico tanto de entrada como de salida. como se vio se utiliz putty, con la ayuda del túnel SSH estaremos cifrando la totalidad de nuestro tráfico.
-
-\section{Bibliograf\'ia}
+En la pr\'actica nos damos cuenta la falta de seguridad, para que no puedan interceptar nuestro tr\'afico f\'acilmente, por medio de sniffer como wireshark, 
+si un atacante lanza el ataque hombre de enmedio estar\'a interceptando la totalidad de nuestro tr\'afico tanto de entrada como de salida. Como se vi\'o se utiliz\'o putty, con la ayuda del túnel SSH estaremos cifrando la totalidad de nuestro tráfico.
 
 \end{document}
