@@ -22,15 +22,30 @@
 Cuando un equipo pertenece a una red es posible que \'este pueda ver el tr\'afico de la red, si la navegaci\'on no es segura, dicho equipo puede ver en claro la informaci\'on que se env\'ia por la red.
  
 \section{Objetivo}
+\subsection{ARP Spoofing}
+\subsection{Tunel SSH}
 Cifrar un canal de comunicaci\'on para navegar por la red a\'un por sitios no seguros.
 
 \section{Planteamiento del problema}
+\subsection{ARP Spoofing}
+
+\subsection{Tunel SSH}
 Con herramientas de sniffering como Wireshark es posible ver el tr\'afico de la red, para evitar mandar paquetes con informaci\'on en claro, blindaremos el canal de comunicaci\'on.
 
 \section{Metodolog\'ia a emplear}
+\subsection{ARP Spoofing}
+
+\subsection{Tunel SSH}
 Crearemos un tunel SSH para redirigir el tr\'afico de la red a trav\'es de otra m\'aquina, el flujo de paquetes pasar\'a por un canal SSH, el cual es cifrado, \'esto evitar\'a enviar paquetes en claro por la red.
 
 \section{Materiales}
+
+\subsection{ARP Spoofing}
+\begin{enumerate}
+	\item 
+\end{enumerate}
+
+\subsection{Tunel SSH}
 \begin{enumerate}
 \item M\'aquina virtual con Kali-Linux
 \item Sistema Operativo Windows \(7,8,10\)
@@ -40,9 +55,13 @@ Crearemos un tunel SSH para redirigir el tr\'afico de la red a trav\'es de otra 
 \item Navegador Web Firefox
 \end{enumerate}
 
-\section{Desarrollo}Los siguientes pasos se llevarón a cabo desde el sistema operativo Windows 10, con una m\'aquina virtual con Kali linux.
+\section{Desarrollo}
+\subsection{ARP Spoofing}
 
-\subsection{Obtener IP de m\'aquina host (windows) y m\'aquina virtual (kali linux)}
+\subsection{Tunel SSH}
+Los siguientes pasos se llevarón a cabo desde el sistema operativo Windows 10, con una m\'aquina virtual con Kali linux.
+
+\subsubsection{Obtener IP de m\'aquina host (windows) y m\'aquina virtual (kali linux)}
 En Windows abrimos la l\'inea de comandos de windows \emph{cmd} y tecleamos \emph{ipconfig}
 En este caso la IP del host es \emph{192.168.0.102}
 
@@ -61,7 +80,7 @@ En la m\'aquina virtual abrimos una terminal y ejecutamos el comando \emph{ifcon
 \end{figure}
 
 
-\subsection{Configuraci\'on de VirtualBox}
+\subsubsection{Configuraci\'on de VirtualBox}
 
 Ya que conocemos ambas direcciones IP, en Virtualbox nos vamos a \emph{Dispositivos/Red/Preferencias de Red}
 
@@ -87,7 +106,7 @@ Por \'ultimo agregamos una regla con los datos como se muestra a continuaci\'on:
 \includegraphics[width=1\textwidth]{05-CONFIGURADO}
 \end{figure}
 
-\subsection{Configuraci\'on servidor SSH en Kali linux}
+\subsubsection{Configuraci\'on servidor SSH en Kali linux}
 
 En la terminal de Kali editamos del archivo \emph{/etc/ssh/sshd\_config} la l\'inea \emph{PermitRootLogin} y cambiamos su valor a \emph{yes}
 
@@ -107,7 +126,7 @@ Por \'ultimo inicializamos el servicio ssh, para ello tecleamos en la terminal \
 
 Ya tenemos el servidor SSH listo para que accedamos desde Putty.
 
-\subsection{Configuraci\'on de tunel SSH con Putty}
+\subsubsection{Configuraci\'on de tunel SSH con Putty}
 
 Abrimos Putty y tecleamos la IP a la que queremos conectarnos y dejamos el puerto estandar de ssh que es el 22 (ya configuramos virtualbox para que redirija las peticiones del puerto 22 a la m\'aquina virtual). Una vez ingresado la IP y el puerto, guardamos la sesi\'on.
 
@@ -133,7 +152,7 @@ Ya que pudimos acceder a la m\'aquina virtual por medio de SSH, ahora cargamos l
 \includegraphics[width=1\textwidth]{10-PUERTO50000}
 \end{figure}
 
-\subsection{Configuraci\'on de Firefox}
+\subsubsection{Configuraci\'on de Firefox}
 
 Despu\'ues de preparar el tunel SSH, tenemos que configurar nuestro navegador para redirigir el tr\'afico a trav\'es del tunel. Para lo anterior nos vamos a las opciones de Firefox
 
@@ -162,7 +181,7 @@ Por \'ultimo marcamos la casilla que dice \emph{Configuraci\'on manual del proxy
 Damos clic en \emph{Aceptar} y listo, tenemos nuestro tunel SSH que pasa todo el tr\'afico enviado por Firefox en la m\'aquina host a la m\'aquina virtual kali linux de manera encriptada.
 
 \section{Resultados}
-
+\subsection{ARP Spoofing}
 \subsection{Resultados del tunel SSH}
 Para corroborar que funciona el tunel SSH, accedemos a una p\'agina sin seguridad, en este caso utilizamos \emph{www.gusanito.com}.
 
@@ -196,6 +215,8 @@ Al final de lado de la m\'aquina remota, se siguen enviando los paquetes en clar
 \end{figure}
 
 \section{Discusi\'on}
+
+\subsection{ARP Spoofing}
 
 \subsection{Tunel SSH}
 
