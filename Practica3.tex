@@ -23,12 +23,15 @@ Cuando un equipo pertenece a una red es posible que \'este pueda ver el tr\'afic
  
 \section{Objetivo}
 \subsection{ARP Spoofing}
+Un ARP Spoofing es una especie de ataque en el que un atacante env\'ia mensajes falsificados ARP (Address Resolution Protocol) a una LAN.
+Mediante este tipo de ataques, se puede obtener informaci\'on sensible de una v\'ictima que est\'e en la misma red que el atacante, como nombres de usuario, contrase\'nas, coockies, mensajes de correo, etc.
 \subsection{Tunel SSH}
 Cifrar un canal de comunicaci\'on para navegar por la red a\'un por sitios no seguros.
 
 \section{Planteamiento del problema}
 \subsection{ARP Spoofing}
-
+En ARP Spoofing el atacante vincula su direcci\'on MAC con la direcci\'on IP de un equipo leg\'itimo (o servidor) en la red.
+Si el atacante logró vincular su dirección MAC a una dirección IP auténtica, va a empezar a recibir cualquier dato que se puede acceder mediante la dirección IP.
 \subsection{Tunel SSH}
 Con herramientas de sniffering como Wireshark es posible ver el tr\'afico de la red, para evitar mandar paquetes con informaci\'on en claro, blindaremos el canal de comunicaci\'on.
 
@@ -42,7 +45,10 @@ Crearemos un tunel SSH para redirigir el tr\'afico de la red a trav\'es de otra 
 
 \subsection{ARP Spoofing}
 \begin{enumerate}
-	\item 
+\item M\'aquina virtual con Kali-Linux
+\item Sistema Operativo Windows \(7,8,10\)
+\item Ettercap
+\item Wireshark
 \end{enumerate}
 
 \subsection{Tunel SSH}
@@ -57,6 +63,48 @@ Crearemos un tunel SSH para redirigir el tr\'afico de la red a trav\'es de otra 
 
 \section{Desarrollo}
 \subsection{ARP Spoofing}
+Los siguientes pasos se realizar\'on estando en Kali Linux.
+\subsubsection{Realizar ataque ARP Poisoning utilizando la herramienta Ettercap en Kali Linux.}
+Ejecutar Ettercap, em¿n el men\'u de aplicaciones, submen\'u Sniff->Unified Sniffing.
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{01-UNIFIEDSNIFFING}
+\end{figure}
+
+Posteriormente buscar los Host conectados en el men\'u, Host->Host List.
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{02-HOSTLIST}
+\end{figure}
+
+Para realizar la suplantaci\'on 
+
+En Target 1 Seleccionamos la IP del dispositivo a monitorear, en este caso windows 7 o superior.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{03-TARGET1}
+\end{figure}
+
+En Target 2 Se debe pulsar sobre la IP a suplantar, en este caso haremos uso de la puerta de enlace.
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{04-TARGET2}
+\end{figure}
+
+En el men\'u elegir Mitm->ARP poisoning  y seleccionar Sniff remote connections
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{05-ARPPOISONING}
+\end{figure}
+
+Una vez hecho esto ya esta suplantada la direcci\'ón MAC y se habilita Wireshark para monitorear el tr\'afico
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{06-WIRESHARK1}
+\end{figure}
+
+
 
 \subsection{Tunel SSH}
 Los siguientes pasos se llevarón a cabo desde el sistema operativo Windows 10, con una m\'aquina virtual con Kali linux.
