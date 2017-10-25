@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lecturaarchivo;
 import java.io.*;
 /**
  *
@@ -18,8 +17,8 @@ public class LecturaArchivo {
         // TODO code application logic here
         int c,d;
         int[] histograma= new int[256];
-	String archivo = ( "/home/invitado/Descargas/archivos/DOC.doc" );
-	String archivo2 = ( "/home/invitado/Descargas/archivos/DOC2.doc" );
+	String archivo = ( "/root/Leeme.txt" );
+	String archivo2 = ( "/root/Leeme2.txt" );
 	File inFile = new File ( archivo ) ;
 	File outFile = new File ( archivo2 ) ;
 	//Inicializamos histograma
@@ -46,23 +45,33 @@ public class LecturaArchivo {
 	}catch ( Exception e ) {
         
         }
-        
+	
         makegnuplot(histograma);
         
     }
     
     public static void makegnuplot(int[] histograma){
-        FileWriter fichero = null ;
-        PrintWriter pw = null ;
+
+	//Generamos un archivo con los datos del histograma
+	//La idea es que despues podamos sacar los datos para graficarlos con otro programa
+        File fichero = new File("plot.dat");
         try{
-            fichero = new FileWriter ("/home/invitado/Descargas/plot") ;
-            pw = new PrintWriter ( fichero ) ;
-            pw.println ("") ;
+            FileWriter pw = new FileWriter (fichero) ;
+            
             for(int i=0; i<256;i++){
-                pw.println(i+"\t"+histograma[i]);
+                pw.write(i+" "+histograma[i]+"\n");
             }
+	    pw.close();
+	
+	    /* Codigo para hacer que gnuplot grafique el histograma, aun no funciona
+	     * String[] cmd = {"gnuplot", "-e", "\"set", "terminal", "png", "size", "800,600;", "set", "output", "'histograma.png';", "set", "xlabel" ,"'Valor", "asccii';", "set", "ylabel", "'Frecuencia'", ";", "set", "title", "'Histograma'", ";", "set", "xrange", "[0:255];", "plot", "'plot.dat'\""};
+
+	System.out.println(cmd);
+	Runtime.getRuntime().exec(cmd);
+	*/
         }catch(Exception e){
             
         }
+
     }
 }
